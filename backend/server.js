@@ -13,15 +13,18 @@ const port = process.env.PORT || 4000;
 
 // middlewares
 app.use(express.json())
-app.use(cors({ origin: 'https://ilcibo-lovat.vercel.app' }));
+app.use(cors({
+  origin: 'https://ilcibo-lovat.vercel.app', // Allow requests only from this origin
+  credentials: true, // Allow credentials to be sent
+}));
 
 app.options('/api/order/placecod', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
   res.status(200).end(); // Send HTTP 200 status to the preflight request
 });
-
 // db connection
 connectDB()
 
