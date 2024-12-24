@@ -9,6 +9,6 @@ orderRouter.post("/userorders",authMiddleware,userOrders);
 orderRouter.post("/place",authMiddleware,placeOrder);
 orderRouter.post("/status",updateStatus);
 orderRouter.post("/verify",verifyOrder);
-orderRouter.post("/placecod",authMiddleware,placeOrderCod);
+orderRouter.post("/placecod",placeOrderCod);
 
 export default orderRouter;

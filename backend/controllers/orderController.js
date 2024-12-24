@@ -1,13 +1,14 @@
 import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js"
 import Stripe from 'stripe';
-
+import jwt from 'jsonwebtoken';
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //config variables
 const currency = "inr";
 const deliveryCharge = 0;
 const frontend_URL = 'https://ilcibo-pizzeria.onrender.com';
+
 
 // Placing User Order for Frontend using stripe
 const placeOrder = async (req, res) => {
@@ -70,28 +71,46 @@ const placeOrder = async (req, res) => {
 
 // Placing User Order for Frontend using stripe
 const placeOrderCod = async (req, res) => {
-
     try {
+        console.log("Route reached")
+        // Save the order to the database
         const newOrder = new orderModel({
-            userId: req.body.userId,
             items: req.body.items,
             amount: req.body.amount,
             address: req.body.address,
             payment: true,
-        })
-        console.log(newOrder,"newOrder Backend");
-        
+        });
+
+        console.log(newOrder, "newOrder Backend");
         await newOrder.save();
+
+        // Clear the user's cart
         await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
 
-        res.json({ success: true, message: "Order Placed" });
+        // Generate a JWT with the order details
+        const tokenPayload = {
+            orderId: newOrder._id,
+            items: newOrder.items,
+            amount: newOrder.amount,
+            address: newOrder.address,
+            payment: newOrder.payment,
+        };
+
+        const orderToken = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
         
+        // Send the token back in the response
+        res.cookie('orderToken', orderToken, { httpOnly: true, maxAge: 2 * 60 * 60 * 1000 });
+        res.json({
+            success: true,
+            message: "Order Placed",
+            token: orderToken, // Optionally include this for frontend debugging
+        });
 
     } catch (error) {
         console.log(error);
-        res.json({ success: false, message: "Error" })
+        res.json({ success: false, message: "Error" });
     }
-}
+};
 
 // Listing Order for Admin panel
 const listOrders = async (req, res) => {
