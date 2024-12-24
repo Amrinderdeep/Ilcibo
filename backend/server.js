@@ -13,13 +13,14 @@ const port = process.env.PORT || 4000;
 
 // middlewares
 app.use(express.json())
-const corsOptions ={
-    origin:'https:', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
+app.use(cors({ origin: 'https://ilcibo-lovat.vercel.app' }));
 
+app.options('/api/order/placecod', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.status(200).end(); // Send HTTP 200 status to the preflight request
+});
 
 // db connection
 connectDB()
