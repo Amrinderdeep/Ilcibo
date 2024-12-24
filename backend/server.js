@@ -16,7 +16,12 @@ const cors = require('cors');
 app.use(express.json())
 app.use(cors());
 
-app.options('*', cors());
+app.options('/api/order/placecod', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.status(200).end(); // Send HTTP 200 status to the preflight request
+});
 
 
 // db connection
