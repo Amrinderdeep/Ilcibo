@@ -11,6 +11,7 @@ import orderRouter from "./routes/orderRoute.js"
 const app = express()
 const port = process.env.PORT || 4000;
 
+const cors = require('cors');
 // middlewares
 app.use(express.json())
 app.use(cors({
@@ -20,7 +21,6 @@ app.use(cors({
 }));
 
 app.options('*', cors());
-app.use(cors());
 
 
 // db connection
