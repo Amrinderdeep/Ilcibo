@@ -14,7 +14,7 @@ const port = process.env.PORT || 4000;
 // middlewares
 app.use(express.json())
 app.use(cors({
-  origin: ['https://ilcibo-admin.onrender.com', 'https://ilcibo-pizzeria.onrender.com','http://localhost:5173','http://localhost:5174', 'http://localhost:5176'],
+  origin: ['https://ilcibo-admin.onrender.com', 'https://ilcibo-pizzeria.onrender.com','http://localhost:5173','http://localhost:5174', 'http://localhost:5176', "https://ilcibo-lovat.vercel.app"],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
