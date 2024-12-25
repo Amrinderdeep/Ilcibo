@@ -59,9 +59,7 @@ const PlaceOrder = () => {
               orderData, 
             {
               withCredentials: true, // Include cookies and credentials
-              headers: {
-                'Content-Type': 'application/json', // Set the content type
-              },
+              headers: { token },
             });            
             if (response.data.success) {
             localStorage.setItem('orderToken', response.data.token);

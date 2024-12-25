@@ -19,10 +19,10 @@ app.use(cors({
   methods : ['GET', 'POST', 'OPTIONS']
 }));
 app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
   res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
   res.sendStatus(200); // Send HTTP 200 status to the preflight request
 });
 
