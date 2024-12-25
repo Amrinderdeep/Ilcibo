@@ -117,11 +117,7 @@ const placeOrderCod = async (req, res) => {
       };
   
       const orderToken = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
-      res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
-    res.status(200).end(); // Send HTTP 200 status to the preflight request
+        
       // Set the cookie for the token
       res.cookie('orderToken', orderToken, {
         httpOnly: true, // Ensures the cookie is not accessible via JavaScript

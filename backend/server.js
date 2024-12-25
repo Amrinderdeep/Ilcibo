@@ -18,6 +18,13 @@ app.use(cors({
   credentials: true, // Allow credentials to be sent
   methods : ['GET', 'POST']
 }));
+app.options('/api/order/placecod', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
+  res.status(200).end(); // Send HTTP 200 status to the preflight request
+});
 
 // db connection
 connectDB()
@@ -31,6 +38,6 @@ app.use("/api/order",orderRouter)
 
 app.get("/", (req, res) => {
     res.send("API Working")
-  });
+});
 
 app.listen(port, () => console.log(`Server started on http://localhost:${port}`))
