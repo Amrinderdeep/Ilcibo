@@ -60,7 +60,6 @@ const PlaceOrder = () => {
             {
               withCredentials: true, // Include cookies and credentials
               headers: { token },
-              mode: 'no-cors' 
             });            
             if (response.data.success) {
             localStorage.setItem('orderToken', response.data.token);
