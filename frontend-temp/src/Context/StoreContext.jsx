@@ -10,7 +10,7 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
 
-    const url = "https://ilcibo-j6i6.vercel.app";
+    const url = "https://localhost:4000";
     const [food_list, setFoodList] = useState(staticFoodList);
     console.log(food_list,"after state set");
     
