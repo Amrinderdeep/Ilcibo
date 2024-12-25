@@ -18,6 +18,8 @@ app.use(cors({
   credentials: true, // Allow credentials to be sent
 }));
 
+
+
 app.options('*', (req, res) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
   res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');

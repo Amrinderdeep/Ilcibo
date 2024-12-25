@@ -8,7 +8,7 @@ orderRouter.options("/placecod", (req, res) => {
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
     res.setHeader("Access-Control-Allow-Credentials", "true");
-    res.status(200).end();
+    res.sendStatus(200);
  });
 orderRouter.get("/list",listOrders);
 orderRouter.post("/userorders",authMiddleware,userOrders);
