@@ -91,6 +91,11 @@ export default function handler(req, res) {
 // Placing User Order for Frontend using stripe
 const placeOrderCod = async (req, res) => {
     try {
+        res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
+        res.status(200).end(); // Send HTTP 200 status to the preflight request
         console.log("Route reached")
         // Save the order to the database
         const newOrder = new orderModel({
@@ -118,7 +123,7 @@ const placeOrderCod = async (req, res) => {
         const orderToken = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
         
         // Send the token back in the response
-        res.cookie('orderToken', orderToken, { httpOnly: true, maxAge: 2 * 60 * 60 * 1000 });
+        res.cookie('orderToken', orderToken, { httpOnly: true, maxAge: 2 * 60 * 60 * 1000, sameSite: 'None' });
         res.json({
             success: true,
             message: "Order Placed",
