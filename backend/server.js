@@ -23,7 +23,7 @@ app.options('*', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.sendStatus(200); // Send HTTP 200 status to the preflight request
+  res.status(200).end(); // Send HTTP 200 status to the preflight request
 });
 
 // db connection
