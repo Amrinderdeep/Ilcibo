@@ -55,7 +55,7 @@ const PlaceOrder = () => {
             }
         }
         else{
-            let response = await axios.post(url + "/api/order/place", 
+            let response = await axios.post(url + "/api/order/placecod", 
               orderData, 
             {
               withCredentials: true, // Include cookies and credentials
