@@ -55,7 +55,7 @@ const PlaceOrder = () => {
             }
         }
         else{
-            axios.post('https://ilcibo-j6i6.vercel.app/api/order/placecod', 
+            let response = await axios.post(url + "/api/order/place", 
               orderData, 
             {
               withCredentials: true, // Include cookies and credentials
