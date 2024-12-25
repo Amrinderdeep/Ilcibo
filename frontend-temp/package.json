@@ -9,6 +9,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+  "proxy": "https://ilcibo-j6i6.vercel.app",
   "dependencies": {
     "@stripe/stripe-js": "^3.0.3",
     "axios": "^1.6.7",
