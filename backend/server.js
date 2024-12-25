@@ -16,6 +16,7 @@ app.use(express.json())
 app.use(cors({
   origin: 'https://ilcibo-lovat.vercel.app', // Allow requests only from this origin
   credentials: true, // Allow credentials to be sent
+  methods : ['GET', 'POST']
 }));
 
 // db connection
