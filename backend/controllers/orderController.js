@@ -128,7 +128,7 @@ const placeOrderCod = async (req, res) => {
       });
   
       // Send the response
-      res.json({
+      res.status(200).json({
         success: true,
         message: "Order Placed",
         token: orderToken, // Optionally include this for frontend debugging
