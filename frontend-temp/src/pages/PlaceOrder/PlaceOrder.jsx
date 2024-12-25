@@ -68,7 +68,7 @@ const PlaceOrder = () => {
             navigate("/myorders")
             toast.success(response.data.message)
             setCartItems({});
-        }
+            }
         else {
             toast.error("Something Went Wrong")
             console.log(response,"response");

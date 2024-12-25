@@ -123,8 +123,8 @@ const placeOrderCod = async (req, res) => {
       res.cookie('orderToken', orderToken, {
         httpOnly: true, // Ensures the cookie is not accessible via JavaScript
         secure: true, // Ensures the cookie is sent only over HTTPS
-        maxAge: 2 * 60 * 60 * 1000, // 2 hours
         sameSite: 'None', // Required for cross-origin requests
+        maxAge: 2 * 60 * 60 * 1000, // 2 hours
       });
   
       // Send the response

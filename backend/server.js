@@ -16,14 +16,14 @@ app.use(express.json())
 app.use(cors({
   origin: 'https://ilcibo-lovat.vercel.app', // Allow requests only from this origin
   credentials: true, // Allow credentials to be sent
-  methods : ['GET', 'POST']
+  methods : ['GET', 'POST', 'OPTIONS']
 }));
-app.options('/api/order/placecod', (req, res) => {
+app.options('*', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
-  res.status(200).end(); // Send HTTP 200 status to the preflight request
+  res.sendStatus(200); // Send HTTP 200 status to the preflight request
 });
 
 // db connection
