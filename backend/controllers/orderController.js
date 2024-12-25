@@ -91,50 +91,57 @@ export default function handler(req, res) {
 // Placing User Order for Frontend using stripe
 const placeOrderCod = async (req, res) => {
     try {
-        res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-        res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
-        res.status(200).end(); // Send HTTP 200 status to the preflight request
-        console.log("Route reached")
-        // Save the order to the database
-        const newOrder = new orderModel({
-            items: req.body.items,
-            amount: req.body.amount,
-            address: req.body.address,
-            payment: true,
-        });
-
-        console.log(newOrder, "newOrder Backend");
-        await newOrder.save();
-
-        // Clear the user's cart
-        await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
-
-        // Generate a JWT with the order details
-        const tokenPayload = {
-            orderId: newOrder._id,
-            items: newOrder.items,
-            amount: newOrder.amount,
-            address: newOrder.address,
-            payment: newOrder.payment,
-        };
-
-        const orderToken = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
-        
-        // Send the token back in the response
-        res.cookie('orderToken', orderToken, { httpOnly: true, maxAge: 2 * 60 * 60 * 1000, sameSite: 'None' });
-        res.json({
-            success: true,
-            message: "Order Placed",
-            token: orderToken, // Optionally include this for frontend debugging
-        });
-
+      console.log("Route reached");
+  
+      // Save the order to the database
+      const newOrder = new orderModel({
+        items: req.body.items,
+        amount: req.body.amount,
+        address: req.body.address,
+        payment: true,
+      });
+  
+      console.log(newOrder, "newOrder Backend");
+      await newOrder.save();
+  
+      // Clear the user's cart
+      await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
+  
+      // Generate a JWT with the order details
+      const tokenPayload = {
+        orderId: newOrder._id,
+        items: newOrder.items,
+        amount: newOrder.amount,
+        address: newOrder.address,
+        payment: newOrder.payment,
+      };
+  
+      const orderToken = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
+      res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
+    res.status(200).end(); // Send HTTP 200 status to the preflight request
+      // Set the cookie for the token
+      res.cookie('orderToken', orderToken, {
+        httpOnly: true, // Ensures the cookie is not accessible via JavaScript
+        secure: true, // Ensures the cookie is sent only over HTTPS
+        maxAge: 2 * 60 * 60 * 1000, // 2 hours
+        sameSite: 'None', // Required for cross-origin requests
+      });
+  
+      // Send the response
+      res.json({
+        success: true,
+        message: "Order Placed",
+        token: orderToken, // Optionally include this for frontend debugging
+      });
+  
     } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: "Error" });
+      console.error(error);
+      res.status(500).json({ success: false, message: "Error placing the order", error: error.message });
     }
-};
+  };
 
 // Listing Order for Admin panel
 const listOrders = async (req, res) => {

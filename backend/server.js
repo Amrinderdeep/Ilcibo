@@ -18,9 +18,6 @@ app.use(cors({
   credentials: true, // Allow credentials to be sent
 }));
 
-app.options('/api/order/placecod', (req, res) => {
-  
-});
 // db connection
 connectDB()
 
