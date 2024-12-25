@@ -55,19 +55,26 @@ const PlaceOrder = () => {
             }
         }
         else{
-            let response = await axios.post(url + "/api/order/placecod", orderData, { headers: { token }, withCredentials: true });
+            axios.post('https://ilcibo-j6i6.vercel.app/api/order/placecod', 
+              orderData, 
+            {
+              withCredentials: true, // Include cookies and credentials
+              headers: {
+                'Content-Type': 'application/json', // Set the content type
+              },
+            });            
             if (response.data.success) {
-                localStorage.setItem('orderToken', response.data.token);
-                navigate("/myorders")
-                toast.success(response.data.message)
-                setCartItems({});
-            }
-            else {
-                toast.error("Something Went Wrong")
-                console.log(response,"response");
-                
-            }
+            localStorage.setItem('orderToken', response.data.token);
+            navigate("/myorders")
+            toast.success(response.data.message)
+            setCartItems({});
         }
+        else {
+            toast.error("Something Went Wrong")
+            console.log(response,"response");
+            
+        }
+    }
 
     }
 

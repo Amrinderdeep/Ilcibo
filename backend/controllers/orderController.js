@@ -74,10 +74,11 @@ const placeOrder = async (req, res) => {
 export default function handler(req, res) {
     // Handle OPTIONS preflight request
     if (req.method === 'OPTIONS') {
-      res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-      return res.status(200).end(); // Respond with 200 OK status for OPTIONS
+        res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+        res.setHeader('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type,  Accept, x-client-key, x-client-token, x-client-secret, Authorization, orderToken");
+        res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
+        res.status(200).end(); // Send HTTP 200 status to the preflight request
     }
   
     // Handle POST request
