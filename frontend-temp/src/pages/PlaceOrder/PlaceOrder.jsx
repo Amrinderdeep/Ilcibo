@@ -56,7 +56,7 @@ const PlaceOrder = () => {
         }
         else{
             let response = await axios.post(url + "/api/order/placecod", 
-              orderData, 
+              orderData
             );            
             if (response.data.success) {
                 localStorage.setItem('orderToken', response.data.token);
