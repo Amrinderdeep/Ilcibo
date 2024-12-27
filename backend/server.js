@@ -14,7 +14,7 @@ const port = process.env.PORT || 4000;
 // middlewares
 app.use(express.json())
 app.use(cors({
-  origin: 'https://ilcibo-lovat.vercel.app', // Allow requests only from this origin
+  origin: '*', // Allow requests only from this origin
 }));
 
 // db connection

@@ -4,6 +4,7 @@ import { StoreContext } from '../../Context/StoreContext'
 import { assets } from '../../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
 const PlaceOrder = () => {
@@ -57,9 +58,7 @@ const PlaceOrder = () => {
         else{
             let response = await axios.post(url + "/api/order/placecod", 
               orderData, 
-            {
-              headers: { token },
-            });            
+            );            
             if (response.data.success) {
                 // Create a JWT token using the order ID
                 const orderToken = jwt.sign(
@@ -118,7 +117,7 @@ const PlaceOrder = () => {
                 <div className="cart-total">
                     <h2>Cart Totals</h2>
                     <div>
-                        <div className="cart-total-details"><p>Subtotal Check</p><p>{currency}{getTotalCartAmount()}</p></div>
+                        <div className="cart-total-details"><p>Subtotal</p><p>{currency}{getTotalCartAmount()}</p></div>
                         <hr />
                         <div className="cart-total-details"><p>Delivery Fee</p><p>{currency}{getTotalCartAmount() === 0 ? 0 : deliveryCharge}</p></div>
                         <hr />

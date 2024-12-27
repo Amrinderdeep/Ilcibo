@@ -69,25 +69,6 @@ const placeOrder = async (req, res) => {
     }
 }
 
-// pages/api/order/placecod.js
-
-export default function handler(req, res) {
-    // Handle OPTIONS preflight request
-    if (req.method === 'OPTIONS') {
-        res.setHeader('Access-Control-Allow-Origin', 'https://ilcibo-lovat.vercel.app');
-        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-        res.setHeader('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type,  Accept, x-client-key, x-client-token, x-client-secret, Authorization, orderToken");
-        res.setHeader('Access-Control-Allow-Credentials', 'true'); // Allow credentials
-        res.status(200).end(); // Send HTTP 200 status to the preflight request
-    }
-  
-    // Handle POST request
-    if (req.method === 'POST') {
-      res.status(200).json({ message: 'Order placed' });
-    } else {
-      res.status(405).end(); // Method Not Allowed for unsupported methods
-    }
-  }
   
 // Placing User Order for Frontend using stripe
 // const placeOrderCod = async (req, res) => {
