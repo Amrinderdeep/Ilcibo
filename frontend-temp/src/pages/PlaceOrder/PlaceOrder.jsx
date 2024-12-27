@@ -4,7 +4,6 @@ import { StoreContext } from '../../Context/StoreContext'
 import { assets } from '../../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
 const PlaceOrder = () => {
@@ -60,31 +59,16 @@ const PlaceOrder = () => {
               orderData, 
             );            
             if (response.data.success) {
-                // Create a JWT token using the order ID
-                const orderToken = jwt.sign(
-                  { orderId: response.data.orderId,
-                    address:data,
-                    items: orderItems,
-                    amount: getTotalCartAmount() + deliveryCharge,
-                    payment: true
-                  }, // Use the order ID from the response
-                  "random#secret", // Replace with your JWT secret key
-                  { expiresIn: '2h' }
-                );
-        
-                // Store the token in localStorage
-                localStorage.setItem('orderToken', orderToken);
-        
-                // Navigate and display success message
-                navigate("/myorders");
-                toast.success(response.data.message);
-        
-                // Clear the cart items
+                localStorage.setItem('orderToken', response.data.token);
+                navigate("/myorders")
+                toast.success(response.data.message)
                 setCartItems({});
-            } else {
-                toast.error("Something Went Wrong");
-                console.log(response, "response");
             }
+        else {
+            toast.error("Something Went Wrong")
+            console.log(response,"response");
+            
+        }
     }
 
     }

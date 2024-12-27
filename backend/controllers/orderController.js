@@ -70,86 +70,56 @@ const placeOrder = async (req, res) => {
 }
 
   
-// Placing User Order for Frontend using stripe
-// const placeOrderCod = async (req, res) => {
-//     try {
-//       console.log("Route reached");
-  
-//       // Save the order to the database
-//       const newOrder = new orderModel({
-//         items: req.body.items,
-//         amount: req.body.amount,
-//         address: req.body.address,
-//         payment: true,
-//       });
-  
-//       console.log(newOrder, "newOrder Backend");
-//       await newOrder.save();
-  
-//       // Clear the user's cart
-//       await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
-  
-//       // Generate a JWT with the order details
-//       const tokenPayload = {
-//         orderId: newOrder._id,
-//         items: newOrder.items,
-//         amount: newOrder.amount,
-//         address: newOrder.address,
-//         payment: newOrder.payment,
-//       };
-  
-//       const orderToken = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
-        
-//       // Set the cookie for the token
-//       res.cookie('orderToken', orderToken, {
-//         httpOnly: true, // Ensures the cookie is not accessible via JavaScript
-//         secure: true, // Ensures the cookie is sent only over HTTPS
-//         sameSite: 'None', // Required for cross-origin requests
-//         maxAge: 2 * 60 * 60 * 1000, // 2 hours
-//       });
-  
-//       // Send the response
-//       res.status(200).json({
-//         success: true,
-//         message: "Order Placed",
-//         token: orderToken, // Optionally include this for frontend debugging
-//       });
-  
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ success: false, message: "Error placing the order", error: error.message });
-//     }
-//   };
-
 const placeOrderCod = async (req, res) => {
     try {
-        console.log("Route reached");
-
-        // Save the order to the database
-        const newOrder = new orderModel({
-            items: req.body.items,
-            amount: req.body.amount,
-            address: req.body.address,
-            payment: true,
-        });
-
-        console.log(newOrder, "newOrder Backend");
-        await newOrder.save();
-
-        // Clear the user's cart
-        await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
-
-        // Send the response with the order ID
-        res.status(200).json({
-            success: true,
-            message: "Order Placed",
-            orderId: newOrder._id, // Send the order ID
-        });
+      console.log("Route reached");
+  
+      // Save the order to the database
+      const newOrder = new orderModel({
+        items: req.body.items,
+        amount: req.body.amount,
+        address: req.body.address,
+        payment: true,
+      });
+  
+      console.log(newOrder, "newOrder Backend");
+      await newOrder.save();
+  
+      // Clear the user's cart
+      await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
+  
+      // Generate a JWT with the order details
+      const tokenPayload = {
+        orderId: newOrder._id,
+        items: newOrder.items,
+        amount: newOrder.amount,
+        address: newOrder.address,
+        payment: newOrder.payment,
+      };
+  
+      const orderToken = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
+        
+      // Set the cookie for the token
+    //   res.cookie('orderToken', orderToken, {
+    //     httpOnly: true, // Ensures the cookie is not accessible via JavaScript
+    //     secure: true, // Ensures the cookie is sent only over HTTPS
+    //     sameSite: 'None', // Required for cross-origin requests
+    //     maxAge: 2 * 60 * 60 * 1000, // 2 hours
+    //   });
+  
+      // Send the response
+      res.status(200).json({
+        success: true,
+        message: "Order Placed",
+        token: orderToken, // Optionally include this for frontend debugging
+      });
+  
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: "Error placing the order", error: error.message });
+      console.error(error);
+      res.status(500).json({ success: false, message: "Error placing the order", error: error.message });
     }
-};
+  };
+
 
 // Listing Order for Admin panel
 const listOrders = async (req, res) => {
