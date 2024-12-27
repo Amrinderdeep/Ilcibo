@@ -51,7 +51,8 @@ app.post("/api/order/placecod", async (req, res) => {
     };
 
     const orderToken = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
-      
+    res.statusCode =200;
+    res.setHeader('Content-Type', 'application/json');
     // Send the response
     res.status(200).json({
       success: true,
