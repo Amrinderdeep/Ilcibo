@@ -174,4 +174,4 @@ const verifyOrder = async (req, res) => {
 
 }
 
-export { placeOrder, listOrders, userOrders, updateStatus, verifyOrder, placeOrderCod }
+export { listOrders, userOrders, updateStatus, verifyOrder, placeOrderCod }
