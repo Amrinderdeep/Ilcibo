@@ -2,7 +2,7 @@ import orderModel from "../models/orderModel.js";
 import userModel from "../models/userModel.js"
 import Stripe from 'stripe';
 import jwt from 'jsonwebtoken';
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //config variables
 const currency = "inr";
@@ -11,63 +11,63 @@ const frontend_URL = 'https://ilcibo-pizzeria.onrender.com';
 
 
 // // Placing User Order for Frontend using stripe
-const placeOrder = async (req, res) => {
+// const placeOrder = async (req, res) => {
 
-    try {
-        const newOrder = new orderModel({
-            userId: req.body.userId,
-            items: req.body.items,
-            amount: req.body.amount,
-         address:req.body.address
-        })
-        await newOrder.save();
-        await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
+//     try {
+//         const newOrder = new orderModel({
+//             userId: req.body.userId,
+//             items: req.body.items,
+//             amount: req.body.amount,
+//          address:req.body.address
+//         })
+//         await newOrder.save();
+//         await userModel.findByIdAndUpdate(req.body.userId, { cartData: {} });
 
-        const line_items = req.body.items.map((item) => ({
-            price_data: {
-                currency: currency,
-                product_data: {
-                    name: item.name
-                },
-                unit_amount: item.price * 100 
-            },
-            quantity: item.quantity
-        }))
+//         const line_items = req.body.items.map((item) => ({
+//             price_data: {
+//                 currency: currency,
+//                 product_data: {
+//                     name: item.name
+//                 },
+//                 unit_amount: item.price * 100 
+//             },
+//             quantity: item.quantity
+//         }))
 
-        line_items.push({
-            price_data: {
-                currency: currency,
-                product_data: {
-                    name: "Delivery Charge"
-                },
-                unit_amount: deliveryCharge * 100
-            },
-            quantity: 1
-        })
+//         line_items.push({
+//             price_data: {
+//                 currency: currency,
+//                 product_data: {
+//                     name: "Delivery Charge"
+//                 },
+//                 unit_amount: deliveryCharge * 100
+//             },
+//             quantity: 1
+//         })
 
-        const session = await stripe.checkout.sessions.create({
-            success_url: `${frontend_URL}/verify?success=true&orderId=${newOrder._id}`,
-            cancel_url: `${frontend_URL}/verify?success=false&orderId=${newOrder._id}`,
-            line_items: line_items,
-            mode: 'payment',
-        });
+//         const session = await stripe.checkout.sessions.create({
+//             success_url: `${frontend_URL}/verify?success=true&orderId=${newOrder._id}`,
+//             cancel_url: `${frontend_URL}/verify?success=false&orderId=${newOrder._id}`,
+//             line_items: line_items,
+//             mode: 'payment',
+//         });
 
-        res.json({ success: true, session_url: session.url });
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,  Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-          next();
-        console.log(res,"res ordercontroller");
+//         res.json({ success: true, session_url: session.url });
+//         res.header("Access-Control-Allow-Origin", "*");
+//         res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+//         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type,  Accept, x-client-key, x-client-token, x-client-secret, Authorization");
+//           next();
+//         console.log(res,"res ordercontroller");
         
-        console.log(session,"session");
+//         console.log(session,"session");
         
 
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: "Error" })
+//     } catch (error) {
+//         console.log(error);
+//         res.json({ success: false, message: "Error" })
 
-    }
-}
+//     }
+// }
 
   
 const placeOrderCod = async (req, res) => {
