@@ -97,7 +97,7 @@ const placeOrderCod = async (req, res) => {
         payment: newOrder.payment,
       };
   
-      const orderToken = jwt.sign(tokenPayload, process.env.JWT_SECRET, { expiresIn: '2h' });
+      const orderToken = jwt.sign(tokenPayload, "random#secret", { expiresIn: '2h' });
         
       // Set the cookie for the token
     //   res.cookie('orderToken', orderToken, {
