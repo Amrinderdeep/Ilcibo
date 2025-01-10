@@ -12,19 +12,19 @@ const MyOrders = () => {
 
   const loadOrdersFromToken = () => {
     const orders = [];
-    // const token = localStorage.getItem('orderToken'); // Fetch the token
+    const token = localStorage.getItem('orderToken'); // Fetch the token
 
-    // if (token) {
-    //   try {
-    //     const decodedToken = jwtDecode(token);
-    //     console.log(decodedToken)
-    //     setData(decodedToken)
-    //   } catch (error) {
-    //     console.error('Error decoding token:', error);
-    //   }
-    // } else {
-    //   console.error('No token found in storage');
-    // }
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken)
+        setData(decodedToken)
+      } catch (error) {
+        console.error('Error decoding token:', error);
+      }
+    } else {
+      console.error('No token found in storage');
+    }
   };
 
   useEffect(() => {
