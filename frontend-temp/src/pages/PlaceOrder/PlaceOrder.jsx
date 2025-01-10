@@ -55,16 +55,16 @@ const PlaceOrder = () => {
         //     }
         // }
         let response = await axios.post(url + "/api/order/placecod", orderData);            
-        if (response.data.success) {
-            localStorage.setItem('orderToken', response.data.token);
-            navigate("/myorders")
-            toast.success(response.data.message)
-            setCartItems({});
-        }
-        else {
-            toast.error("Something Went Wrong")
-            console.log(response,"response");
-        }
+            if (response.data.success) {
+                localStorage.setItem('orderToken', response.data.token);
+                navigate("/myorders")
+                toast.success(response.data.message)
+                setCartItems({});
+            }
+            else {
+                toast.error("Something Went Wrong")
+                console.log(response,"response");
+            }
     }
 
     // useEffect(() => {

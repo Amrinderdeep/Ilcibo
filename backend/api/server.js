@@ -14,11 +14,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 
 // CORS configuration
-app.use(cors({
-  origin: 'https://ilcibo-lovat.vercel.app', // Allow only your frontend URL
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow only specific methods
-  credentials: true, // Allow credentials (if needed for your case)
-}));
+app.use(cors());
 
 // db connection
 connectDB();

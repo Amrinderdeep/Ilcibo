@@ -10,7 +10,7 @@ const deliveryCharge = 0;
 const frontend_URL = 'https://ilcibo-pizzeria.onrender.com';
 
 
-// Placing User Order for Frontend using stripe
+// // Placing User Order for Frontend using stripe
 const placeOrder = async (req, res) => {
 
     try {
@@ -76,9 +76,9 @@ const placeOrderCod = async (req, res) => {
   
       // Save the order to the database
       const newOrder = new orderModel({
+        address: req.body.address,
         items: req.body.items,
         amount: req.body.amount,
-        address: req.body.address,
         payment: true,
       });
   
