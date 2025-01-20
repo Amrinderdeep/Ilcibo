@@ -55,7 +55,7 @@ const MyOrders = () => {
       <div className="container">
         <div className='my-orders-order'>
           <img src={assets.parcel_icon} alt="Parcel Icon" />
-          <p>Order ID: {data.orderId}</p>
+          {/*<p>Order ID: {data.orderId}</p>*/}
           <p>
             Amount:{" "}
             {currency}
@@ -63,6 +63,7 @@ const MyOrders = () => {
           </p>
           <p>Name: {data.address.fullName}</p>
           <p>Contact No: {data.address.phone}</p>
+          <p>Car No: {data.address.carNo}</p>
 
           <p>Items:</p>
             <ul>
