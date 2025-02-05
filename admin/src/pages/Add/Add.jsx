@@ -103,6 +103,7 @@ const Add = () => {
                             <option value="Desserts">Desserts</option>
                             <option value="Snacks">Snacks</option>
                             <option value="Soups">Soups</option>
+                            <option value="Hotdogs">Hotdogs</option>
 
                             <option value="Add-Ons">Add-Ons</option>
                             

@@ -41,6 +41,16 @@ import food_28 from '/images/pesto.jfif'
 import food_29 from '/images/chickenNuggets.jpg'
 import food_30 from '/images/chickenLollipop.jpg'
 import food_31 from '/images/tomatobasilSoup.jpg'
+import food_32 from '/images/veghotdog.jpg'
+import food_33 from '/images/vegHotdogWithCheese.jpg'
+import food_34 from '/images/americanHotdogs.jpg'
+import food_35 from '/images/mexican_chilli.jpg'
+import food_36 from '/images/barbeque.jpg'
+import food_37 from '/images/relish_Gerkins.jpg'
+import food_38 from '/images/hell_hot_dog.jpg'
+import food_39 from '/images/pig_blanket.jpg'
+
+
 
 
 
@@ -125,6 +135,10 @@ export const menu_list = [
     {
         menu_name: "Snacks",
         menu_image: "https://firebasestorage.googleapis.com/v0/b/food-del-9a058.firebasestorage.app/o/explore-menu%2FchickenLollipop.jpg?alt=media&token=fe3fa25e-5897-42b6-bf5d-8bb02d2aa4ce"
+    },
+    {
+        menu_name: "Hotdogs",
+        menu_image: "https://firebasestorage.googleapis.com/v0/b/food-del-9a058.firebasestorage.app/o/food-images%2Fveg%20hotdog.jpg?alt=media&token=20a9715f-4ddd-41fa-ab08-b2aaa53ca847"
     },
   
     ]
@@ -353,6 +367,70 @@ export const menu_list = [
             description: "Rich, creamy, and bursting with fresh flavors, tomato basil soup is a comforting bowl of warmth!",
             category: "Soups"
         }, 
+        {
+            _id: "679b2374dc8852a096765229",
+            name: "Veg Hotdog",
+            image: food_32,
+            price: 100,
+            description: "Delicious grilled veg hot dog loaded with fresh veggies, tangy sauces, and a soft bun–a perfect meat-free treat!",
+            category: "Hotdogs"   
+        },    {
+            _id: "679b27dfdc8852a09676522a",
+            name: "Veg Hotdog With Cheese",
+            image: food_33,
+            price: 120,
+            description: "Cheesy veg hot dog with fresh veggies & tangy sauces in a soft bun",
+            category: "Hotdogs"   
+        }, 
+         {
+            _id: "679b29e9dc8852a09676522b",
+            name: "Classic American Hotdog",
+            image: food_34,
+            price: 150,
+            description: "Classic American hot dog with juicy sausage, mustard, ketchup & soft bun!",
+            category: "Hotdogs"   
+        }, 
+        
+         {
+            _id: "67a2ddba892554086d70b9e7",
+            name: "Mexican Chilli",
+            image: food_35,
+            price: 150,
+            description: "Spicy Mexican chili with rich beans, zesty spices & a bold flavor kick!",
+            category: "Hotdogs"   
+        }, 
+        {
+            _id: "67a2e071892554086d70b9e8",
+            name: "Barbeque",
+            image: food_36,
+            price: 150,
+            description: "Smoky, tender, and flavor-packed BBQ with rich, tangy sauce!",
+            category: "Hotdogs"   
+        }, 
+        {
+            _id: "67a2e2e3892554086d70b9eb",
+            name: "Relish And Gerhkins",
+            image: food_37,
+            price: 165,
+            description: "Zesty relish and crunchy gherkins top this classic hot dog for a tangy twist!",
+            category: "Hotdogs"   
+        }, 
+        {
+            _id: "67a2e4a2892554086d70b9ec",
+            name: "Hell Hot",
+            image: food_38,
+            price: 165,
+            description: "Fiery hot dog loaded with spicy sauces, jalapeños, and a blazing kick!",
+            category: "Hotdogs"   
+        },
+        {
+            _id: "67a2e674892554086d70b9ed",
+            name: "Pig Blanket",
+            image: food_39,
+            price: 200,
+            description: "Juicy sausage wrapped in a golden, flaky pastry for a crispy, savory bite!",
+            category: "Hotdogs"   
+        },
     ]
 
 
